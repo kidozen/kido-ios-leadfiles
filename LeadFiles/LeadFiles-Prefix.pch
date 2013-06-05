@@ -1,0 +1,21 @@
+//
+// Prefix header for all source files of the 'LeadFiles' target in the 'LeadFiles' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#import "FunctionRename.h"
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "KZAppDelegate.h"
+
+
+    #define ThisApp (KZAppDelegate *)[[UIApplication sharedApplication] delegate]
+#endif
+

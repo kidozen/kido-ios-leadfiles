@@ -1,0 +1,12 @@
+/* 
+  FileShareSettings.strings
+  LeadFiles
+
+  Created by Christian Carnero on 4/29/13.
+  Copyright (c) 2013 KidoZen. All rights reserved.
+*/
+
+"Group" = "Group";
+"Name" = "Name";
+"none given" = "none given";
+"Enabled" = "Enabled";

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MobileAppPolicies>
+  <PolicySchemaVersion>1.0</PolicySchemaVersion>
+  <Policies>
+    <ActivePollPeriod>60</ActivePollPeriod>
+    <AppGroupId/>
+    <AuthFailuresBeforeLock>-1</AuthFailuresBeforeLock>
+    <Authentication>NotRequired</Authentication>
+    <BlockJailbrokenDevices>false</BlockJailbrokenDevices>
+    <CertificateLabel/>
+    <CutAndCopy>Unrestricted</CutAndCopy>
+    <DBEncryptionExcludeList/>
+    <DatabaseEncryption>false</DatabaseEncryption>
+    <DisableCamera>false</DisableCamera>
+    <DisableEmail>false</DisableEmail>
+    <DisableLocation>false</DisableLocation>
+    <DisableMicrophone>false</DisableMicrophone>
+    <DisablePrinting>false</DisablePrinting>
+    <DisableSms>false</DisableSms>
+    <DisableiCloud>false</DisableiCloud>
+    <DocumentExchange>Unrestricted</DocumentExchange>
+    <EncryptionKeys>Offline</EncryptionKeys>
+    <InboundURLFilter>*</InboundURLFilter>
+    <InternalWifiNetworks/>
+    <MaxOfflinePeriod>-1</MaxOfflinePeriod>
+    <NetworkAccess>NetworkAccessUnrestricted</NetworkAccess>
+    <OutboundURLFilter>*</OutboundURLFilter>
+    <Paste>Unrestricted</Paste>
+    <PolicySchemaVersion>"1.0"</PolicySchemaVersion>
+    <ReauthenticationPeriod>-1</ReauthenticationPeriod>
+    <RequireInternalNetwork>false</RequireInternalNetwork>
+    <UpgradeGracePeriod>-1</UpgradeGracePeriod>
+    <WifiOnly>false</WifiOnly>
+    <WipeDataOnAppLock>false</WipeDataOnAppLock>
+  </Policies>
+</MobileAppPolicies>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>ShareFile Settings</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>User</string>
+			<key>Key</key>
+			<string>sharefile_user</string>
+			<key>DefaultValue</key>
+			<string>gus@kidozen.com</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Password</string>
+			<key>Key</key>
+			<string>sharefile_password</string>
+			<key>DefaultValue</key>
+			<string>kidozen*1</string>
+			<key>IsSecure</key>
+			<true/>
+		</dict>
+	</array>
+	<key>Strings Filename</key>
+	<string>ShareFileSettings</string>
+</dict>
+</plist>
