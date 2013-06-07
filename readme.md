@@ -1,8 +1,3 @@
----
-layout: default
-title: Kidozen
----
-
 #Leadfiles application
 
 With this application you can link important documents stored on Sharefile, to the company's Leads from Salesforce.
