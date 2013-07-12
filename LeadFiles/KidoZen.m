@@ -141,8 +141,16 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
         if (r.error)
             [[NSNotificationCenter defaultCenter] postNotificationName:KZShareFileError object:r.error];
         else
-            shareFileAuthId = [r.response objectForKey:@"authid"];
-        
+        {
+            if ([r.response isKindOfClass:[NSData class]]) {
+                 [[NSNotificationCenter defaultCenter] postNotificationName:KZSalesForceError object:r.error];
+            }
+            else
+                if (![r.response isKindOfClass:[NSData class]] && [r.response isKindOfClass:[NSDictionary class]]) {
+                    shareFileAuthId = [r.response objectForKey:@"authid"];
+                }
+
+        }
         dispatch_semaphore_signal(s);
     }];
     while (dispatch_semaphore_wait(s, DISPATCH_TIME_NOW)) {
@@ -177,6 +185,12 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
 
 -(void) getFilesFromShareFilePath:(NSString *) path withBlock:(queryArrayOperationBlock) response {
     [self setAuthId];
+    if (!shareFileAuthId) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:KZSalesForceError object:nil];
+        return;
+    }
+    
+    
     NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"authid", shareFileAuthId, path, @"path",nil];
     [self.sharefile invokeMethod:KZ_SHAREFILE_FOLDERLIST_METHODID withData:data completion:^(KZResponse * r) {
         if (r.error)

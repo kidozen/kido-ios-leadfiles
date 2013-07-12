@@ -110,6 +110,7 @@
 //event handler when event occurs
 -(void) kidozenErrortHandler: (NSNotification *) notification
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     NSString * message =@"Error, close the app, close the application, check the application settings and try again";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     [alert show];
