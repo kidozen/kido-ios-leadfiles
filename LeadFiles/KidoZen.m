@@ -172,8 +172,9 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
     else
         return r.response;
 }
+
 -(void) getDetails:(NSString *) file withBlock:(queryDictionaryOperationBlock) response {
-    NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"authid", shareFileAuthId, @"get", @"op", file, @"id",  nil];
+    NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:shareFileAuthId, @"authid", @"get", @"op", file, @"id",  nil];
     
     [self.sharefile invokeMethod:KZ_SHAREFILE_FILEGET_METHODID withData:data completion:^(KZResponse * r) {
         if (r.error)
@@ -191,7 +192,7 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
     }
     
     
-    NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"authid", shareFileAuthId, path, @"path",nil];
+    NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:shareFileAuthId, @"authid", path, @"path",nil];
     [self.sharefile invokeMethod:KZ_SHAREFILE_FOLDERLIST_METHODID withData:data completion:^(KZResponse * r) {
         if (r.error)
             [[NSNotificationCenter defaultCenter] postNotificationName:KZShareFileError object:r.error];
@@ -201,7 +202,7 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
 }
 
 -(void) getFileLinkUsingFileId:(NSString *) file andPath:(NSString *) path withBlock:(operationResponseBlock) response {
-    NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"authid", shareFileAuthId, @"download", @"op", file, @"id",  nil];
+    NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:shareFileAuthId, @"authid", @"download", @"op", file, @"id",  nil];
     
     [self.sharefile invokeMethod:KZ_SHAREFILE_FILELINK_METHODID withData:data completion:^(KZResponse * r) {
         if (r.error)
