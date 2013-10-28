@@ -87,8 +87,9 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
     [self.salesforce invokeMethod:KZ_SALESFORCE_QUERY_METHODID withData:data completion:^(KZResponse * r) {
         if (r.error)
             [[NSNotificationCenter defaultCenter] postNotificationName:KZSalesForceError object:r.error];
-        else
-            response([r.response objectForKey:@"records"]);
+        else {
+            response([[r.response objectForKey:@"data"] objectForKey:@"records"]);
+        }
     }];
 }
 
@@ -107,7 +108,7 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
         if (r.error)
             [[NSNotificationCenter defaultCenter] postNotificationName:KZSalesForceError object:r.error];
         else
-            response([r.response objectForKey:@"success"]);
+            response([[r.response objectForKey:@"data"] objectForKey:@"success"]);
     }];
 }
 
@@ -120,7 +121,7 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
         if (r.error)
             [[NSNotificationCenter defaultCenter] postNotificationName:KZSalesForceError object:r.error];
         else
-            response([[r.response objectForKey:@"records"] objectAtIndex:0]);
+            response([[[r.response objectForKey:@"data"] objectForKey:@"records"] objectAtIndex:0]);
     }];
 }
 
@@ -141,16 +142,8 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
         if (r.error)
             [[NSNotificationCenter defaultCenter] postNotificationName:KZShareFileError object:r.error];
         else
-        {
-            if ([r.response isKindOfClass:[NSData class]]) {
-                 [[NSNotificationCenter defaultCenter] postNotificationName:KZSalesForceError object:r.error];
-            }
-            else
-                if (![r.response isKindOfClass:[NSData class]] && [r.response isKindOfClass:[NSDictionary class]]) {
-                    shareFileAuthId = [r.response objectForKey:@"authid"];
-                }
+            shareFileAuthId = [[r.response objectForKey:@"data"] objectForKey:@"authid"];
 
-        }
         dispatch_semaphore_signal(s);
     }];
     while (dispatch_semaphore_wait(s, DISPATCH_TIME_NOW)) {
@@ -162,11 +155,13 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
 {
     if ([r.response isKindOfClass:[NSDictionary class]]) {
         if ([r.response objectForKey:@"error"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:KZShareFileError object:[r.response objectForKey:@"error"]];
+            NSObject * err = [r.response objectForKey:@"error"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KZShareFileError object:err];
             return nil;
         }
         else {
-            return[r.response objectForKey:@"result"];
+            NSDictionary * data = [r.response objectForKey:@"data"];
+            return data;
         }
     }
     else
@@ -191,7 +186,6 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
         return;
     }
     
-    
     NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:shareFileAuthId, @"authid", path, @"path",nil];
     [self.sharefile invokeMethod:KZ_SHAREFILE_FOLDERLIST_METHODID withData:data completion:^(KZResponse * r) {
         if (r.error)
@@ -209,7 +203,7 @@ NSString *const KZ_SHAREFILE_GETAUTHID_METHODID =@"getAuthID";
             [[NSNotificationCenter defaultCenter] postNotificationName:KZShareFileError object:r.error];
         else
         {
-            NSString *kidoresponse = [[NSString alloc] initWithData:r.response encoding:NSASCIIStringEncoding];
+            NSString *kidoresponse = [r.response objectForKey:@"data"];
             NSString *escaped = [kidoresponse stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             response(escaped);
         }
